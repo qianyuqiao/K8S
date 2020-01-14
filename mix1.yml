@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: mix1
+spec:
+  replicas: 200
+  selector:
+    app: mix1
+  template:
+    metadata:
+      labels:
+        app: mix1
+    spec:
+      nodeSelector:
+        distype: node3
+      containers:
+      - name: ubuntuv14
+        command: ["/run.sh"]
+        image: qianyuqiao/ubuntu:v1.4
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 22
+          protocol: TCP
+
+      - name: redis
+        image: redis
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 6379
+          protocol: TCP
+
+      - name: openssl
+        image: medicean/vulapps:o_openssl_heartbleed
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 443
+
+      - name: memcached
+        image: medicean/vulapps:m_memcached_CVE-2016-8704
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 11211
+      - name: samba
+        image: medicean/vulapps:s_samba_1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 445
+      dnsConfig:
+        nameservers:
+        - 114.114.114.114
+      restartPolicy: Always
