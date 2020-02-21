@@ -24,7 +24,7 @@ kubectl delete nodes  node1
 sudo ip link delete flannel.1
 sudo ip link delete cni0
 ```
-### 5.【master上】加入节点
+### 5.【master上】加入节点,这步做完后flannel可能没有ip
 ```
 kubectl create -f node1.yaml
 ```
