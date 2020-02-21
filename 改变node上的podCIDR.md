@@ -7,13 +7,20 @@ sudo ip link delete cni0
 ```
 
 ### 2.节点yaml文件
+```
 kubectl get node node1 -o yaml > node1.yaml
+```
 ### 修改node1.yaml文件中spec.podCIDR字段
-............<br>
-spec:<br>
+```
+............
+
+spec:
   podCIDR: 10.244.0.0/16
-<br>
+
 ...........
+```
 ### 修改yaml文件后，由于node对象不能直接覆盖创建，需要先删除节点，再重新创建
+```
 kubectl delete nodes  node1
 kubectl create -f node1.yaml
+```
