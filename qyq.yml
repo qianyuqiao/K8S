@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: qyq1
+spec:
+  containers:
+  - name: qyq1
+    image: qianyuqiao/ubuntu:v1.4
+    command: ["/run.sh"]
+    imagePullPolicy: IfNotPresent
